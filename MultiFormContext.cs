@@ -19,6 +19,9 @@ public class MultiFormContext : ApplicationContext
         InitializeComponent();
         TrayIcon.Visible = true;
         TrayIcon.ShowBalloonTip(2000, "Eye Saver", "Eye Saver will prompt you to take an eye break in 20 minutes.", ToolTipIcon.Info);
+
+        _messageController.RegisterShowMessagePolicy(new ShowMessageIn20Minutes());
+        _messageController.RegisterHideMessagePolicy(new HideMessageIn20Seconds());
     }
 
     public void Run()
@@ -27,12 +30,12 @@ public class MultiFormContext : ApplicationContext
         {
             if (((Control)s).Visible == false)
             {
-                await MessageController.WaitForMessageOn();
+                await _messageController.ShowMessage();
                 _forms.ForEach(f => f.Show());
             }
             else
             {
-                await MessageController.WaitForMessageOff();
+                await _messageController.HideMessage();
                 _forms.ForEach(f => f.Hide());
             }
         };
