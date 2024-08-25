@@ -21,7 +21,7 @@ jobs:
       run: dotnet restore
     - name: Build and Publish project
       run: dotnet publish -r win-x64
-    - name: Copy to output directory
+    - name: Copy to package directory
       shell: cmd
       run: |
         move /y bin\Release\net8.0-windows\win-x64 package
