@@ -20,5 +20,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build and Publish project
-      run: dotnet publish -r win-x64 --output ./output
+      run: dotnet publish -r win-x64
+    - name: Copy to output directory
+      shell: cmd
+      run: |
+        move /y bin\Release\net8.0-windows\win-x64 package
+        copy eye-saver.ico package
+        del /q package\publish
 
