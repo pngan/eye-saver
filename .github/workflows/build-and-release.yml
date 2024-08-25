@@ -1,9 +1,9 @@
-name: Build and Release .NET CLI App
+name: Build and Release Eye Saver App for Windows
 
 on:
   push:
-  #  tags:
-  #    - 'v*.*.*'  # Triggers on version tag push
+    tags:
+      - 'v*.*.*'  # Triggers on version tag push
   workflow_dispatch: # Allows manual trigger
 
 jobs:
