@@ -32,3 +32,28 @@ jobs:
       with:
         path: setup.iss
         options: /O.
+    - name: Archive installer
+      uses: actions/upload-artifact@v4
+      with:
+        name: installer
+        path: eyesaver-installer.exe
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref_name }}
+        release_name: Release ${{ github.ref_name }}
+        draft: false
+        prerelease: false
+    - name: Upload Eye Saver Installer to Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: eyesaver-installer.exe
+        asset_name: eyesaver-installer.exe
+        asset_content_type: application/octet-stream
+
