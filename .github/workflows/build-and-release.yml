@@ -2,8 +2,8 @@ name: Build and Release .NET CLI App
 
 on:
   push:
-    tags:
-      - 'v*.*.*'  # Triggers on version tag push
+  #  tags:
+  #    - 'v*.*.*'  # Triggers on version tag push
   workflow_dispatch: # Allows manual trigger
 
 jobs:
@@ -19,5 +19,5 @@ jobs:
         dotnet-version: 8.x
         cache: true
     - name: Restore dependencies
-      run: dotnet restore --locked-mode
+      run: dotnet restore
 
