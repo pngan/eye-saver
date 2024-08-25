@@ -27,4 +27,8 @@ jobs:
         move /y bin\Release\net8.0-windows\win-x64 package
         copy eye-saver.ico package
         del /q package\publish
-
+    - name: Compile .ISS to .EXE Installer
+      uses: Minionguyjpro/Inno-Setup-Action@v1.2.4
+      with:
+        path: setup.iss
+        options: /O.
